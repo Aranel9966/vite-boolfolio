@@ -40,11 +40,11 @@ export default {
     <div class="card-body">
 
       <h5 class="card-title">{{ project.title }}</h5>
-      <!-- <small>Categoria: {{ project.category ? project.category.name : 'nessuna' }}</small> -->
+      <small>Categoria: {{ project.category ? project.category.name : 'nessuna' }}</small>
 
-      <!-- <div class="tags">
-        <span v-for="tag in project.tags" class="badge rounded-pill" :style="{backgroundColor: tag.color}">{{ tag.name }}</span>
-      </div> -->
+      <div class="technologies">
+        <span v-for="technology in project.technologies" class="badge rounded-pill" :style="{backgroundColor: technology.color}">{{ technology.name }}</span>
+      </div>
 
       <p class="card-text"> {{ shortContent }} </p>
       <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -54,27 +54,27 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 
-  .project.card {
-    .cover-image {
-      height: 200px;
+  // .project.card {
+  //   .cover-image {
+  //     height: 200px;
       
-      object-fit: cover;
-      object-position: center;
-    }
+  //     object-fit: cover;
+  //     object-position: center;
+  //   }
 
-    .tags {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: .5em;
+  //   .technologies {
+  //     display: flex;
+  //     justify-content: flex-start;
+  //     align-items: center;
+  //     gap: .5em;
 
-      padding: .8em 0;
+  //     padding: .8em 0;
 
-      overflow-x: scroll;
-    }
+  //     overflow-x: scroll;
+  //   }
     
-  }
+  // }
 
 </style>

@@ -30,7 +30,7 @@ export default {
 
       axios.get('http://127.0.0.1:8000/api/projects').then(response => {
         console.log(response.data.results);
-        this.projects = response.data.results;
+        this.projects = response.data.results.data;
       });
 
     },
@@ -55,21 +55,10 @@ export default {
     </div>
   </div>
 
-  <!-- <div v-else class="loading-screen">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div> -->
 
   
 </template>
 
 <style lang="scss">
-// .loading-screen {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 100%;
-//   min-height: 600px;
-// }
+
 </style>
