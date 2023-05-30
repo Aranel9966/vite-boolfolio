@@ -13,13 +13,13 @@ export default {
   },
 
   computed: {
-    // shortContent() {
-    //   if(this.project.content.length > 50) {
-    //     return this.project.content.substring(0, 50) + '...';
-    //   } else {
-    //     return this.project.content;
-    //   }
-    // },
+    shortdescription() {
+      if(this.project.description.length > 50) {
+        return this.project.description.substring(0, 50) + '...';
+      } else {
+        return this.project.description;
+      }
+    },
 
     coverImage() {
       if(this.project.cover_image == null) {
@@ -27,13 +27,13 @@ export default {
       } else {
         return this.baseUrl + 'storage/' + this.project.cover_image;
       }
-    }
+    },
   },
 }
 </script>
 
 <template>
-  <div class="card project">
+  <div class="card project ">
 
     <img :src="coverImage" class="cover-image card-img-top" alt="...">
 
@@ -46,7 +46,7 @@ export default {
         <span v-for="technology in project.technologies" class="badge rounded-pill" :style="{backgroundColor: technology.color}">{{ technology.name }}</span>
       </div>
 
-      <p class="card-text"> {{ shortContent }} </p>
+      <p class="card-text"> {{ shortdescription }} </p>
       <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
 
     </div>
@@ -55,26 +55,16 @@ export default {
 </template>
 
 <style lang="scss" >
+.project{
+  background-color: #547b9f;
+  h5,small{
 
-  // .project.card {
-  //   .cover-image {
-  //     height: 200px;
-      
-  //     object-fit: cover;
-  //     object-position: center;
-  //   }
-
-  //   .technologies {
-  //     display: flex;
-  //     justify-content: flex-start;
-  //     align-items: center;
-  //     gap: .5em;
-
-  //     padding: .8em 0;
-
-  //     overflow-x: scroll;
-  //   }
-    
-  // }
+    color:#26e422 ;
+  }
+  p{
+    color: white;
+  }
+}
+  
 
 </style>

@@ -1,1 +1,7 @@
 @import "bootstrap/scss/bootstrap";
+body{
+    background-image: url('../public/img/sfondo-prog.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
