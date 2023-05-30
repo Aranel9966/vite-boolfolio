@@ -14,8 +14,8 @@ export default {
 
   computed: {
     shortdescription() {
-      if(this.project.description.length > 50) {
-        return this.project.description.substring(0, 50) + '...';
+      if(this.project.description.length > 40) {
+        return this.project.description.substring(0, 40) + '...';
       } else {
         return this.project.description;
       }
@@ -47,7 +47,6 @@ export default {
       </div>
 
       <p class="card-text"> {{ shortdescription }} </p>
-      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
 
     </div>
 
@@ -56,6 +55,7 @@ export default {
 
 <style lang="scss" >
 .project{
+  min-height:338px;
   background-color: #547b9f;
   h5,small{
 
@@ -64,7 +64,19 @@ export default {
   p{
     color: white;
   }
+  .cover-image {
+    height: 200px;
+    
+    object-fit: cover;
+    object-position: center;
+  }
 }
+
+
+
+    
+    
+  
   
 
 </style>
