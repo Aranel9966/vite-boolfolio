@@ -45,15 +45,13 @@ export default {
 <template>
 
   <div class="container pt-5">
-
+    <h1>I Miei Progetti</h1>
 
     <hr>
 
     <div class="row">
       <div v-for="project in projects" class="col-4 mb-5">
-
         <ProjectCard :project="project"></ProjectCard>
-
       </div>
     </div>
   </div>
@@ -74,6 +72,7 @@ export default {
 </template>
 
 <style lang="scss">
+
   .pagination{
     color: white;
     justify-content: center;
