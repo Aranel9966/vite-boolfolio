@@ -29,6 +29,9 @@ export default {
             <router-link class="nav-link active" aria-current="page"  :to="{name:'home'}">Home</router-link>
           </li>
           <li class="nav-item">
+            <router-link :to="{name:'technology'}" class="nav-link">Tecnologie</router-link>
+          </li>
+          <li class="nav-item">
             <router-link :to="{name:'about'}" class="nav-link">Chi sono?</router-link>
           </li>
         </ul>

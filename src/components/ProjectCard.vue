@@ -48,6 +48,11 @@ export default {
 
       <p class="card-text"> {{ shortdescription }} </p>
 
+      <div class="text-center">
+        <router-link :to="{name: 'projects.show', params: {slug: project.slug}}" class="btn btn-outline-primary">Leggi</router-link>
+
+      </div>
+
     </div>
 
   </div>
