@@ -17,7 +17,8 @@ export default{
 
 </template>
 
-<style lang="scss" >
-    
-
+<style scoped lang="scss" >
+  div{
+  height: 75.8vh;
+  }
 </style>

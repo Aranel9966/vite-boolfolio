@@ -43,7 +43,7 @@ export default {
       <small>Categoria: {{ project.category ? project.category.name : 'nessuna' }}</small>
 
       <div class="technologies">
-        <span v-for="technology in project.technologies" class="badge rounded-pill" :style="{backgroundColor: technology.color}">{{ technology.name }}</span>
+        <span v-for="technology in project.technologies" class="badge rounded-pill m-1" :style="{backgroundColor: technology.color}">{{ technology.name }}</span>
       </div>
 
       <p class="card-text"> {{ shortdescription }} </p>
@@ -58,7 +58,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss" >
+<style scoped lang="scss" >
 .project{
   min-height:338px;
   background-color: #547b9f;
@@ -70,8 +70,7 @@ export default {
     color: white;
   }
   .cover-image {
-    height: 200px;
-    
+    height: 200px; 
     object-fit: cover;
     object-position: center;
   }

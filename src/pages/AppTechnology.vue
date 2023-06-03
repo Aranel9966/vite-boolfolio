@@ -29,9 +29,9 @@ export default{
 </script>
 
 <template>
-    <div class="container pt-5">
-        <h1>Tecnologie </h1>
-        <div class="row d-flex justify-content-center">
+  <h1 class="text-center">Tecnologie </h1>
+    <div class="container pt-5 ">
+        <div class=" d-flex justify-content-center">
             <div v-for="technology in technologies" class="tags col-4 mb-5">
                 <div class="card project " :style="{backgroundColor:technology.color}">
                     <div class="card-body">
@@ -52,17 +52,26 @@ export default{
 
 </template>
 
-<style lang="scss" >
+<style scoped lang="scss" >
 
+.project{
+
+  min-height:500px;
+  min-width:500px;
+  background-color: #547b9f;
+}
   .tags{
-      div{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          h1{            
-              color: white;
-          }
+    display: flex;
+      justify-content: center;
+      align-items: center;
+    div{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h1{            
+          color: white;
       }
+    }
   }
 
 </style>

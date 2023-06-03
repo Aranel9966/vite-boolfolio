@@ -71,7 +71,7 @@ export default {
   
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 
   .pagination{
     color: white;
