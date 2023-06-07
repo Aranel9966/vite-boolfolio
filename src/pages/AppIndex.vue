@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store';
 
 import axios from 'axios';
 
@@ -9,6 +10,7 @@ export default {
 
   data() {
     return {
+      store,
 
       urlApi:'http://127.0.0.1:8000/api/projects',
 
@@ -28,14 +30,27 @@ export default {
   },
 
   methods: {
-    getProjects(urlApi) {
-      axios.get(urlApi).then(response => {
-        console.log(response.data.results);
-        this.projects = response.data.results.data;
-        this.pagination=response.data.results;
-      })
+    // getProjects(urlApi) {
+    //   axios.get(urlApi).then(response => {
+    //     // console.log(response.data.results);
+    //     this.projects = response.data.results.data;
+    //     this.pagination=response.data.results;
+    //   });
+    // }
+    // ,
+    getProjects(){
+      let serchUrlApi = this.urlApi;
+      if(this.store.serch){
 
+        serchUrlApi = `&title=${this.store.serch}`
+      }
+      // console.log('serchUrlApi')
       
+      axios.get(serchUrlApi).then(response=>{
+        this.store.projects= [response.data.results.data];
+        console.log(this.store.projects)
+
+      });
     },
     
   },
@@ -50,13 +65,12 @@ export default {
     <hr>
 
     <div class="row">
-      <div v-for="project in projects" class="col-4 mb-5">
+      <div v-for="project in store.projects"  class="col-4 mb-5">
         <ProjectCard :project="project"></ProjectCard>
       </div>
     </div>
   </div>
  
-  
   <div class=" pagination container ">
     <button v-for="link in pagination.links" class="btn m-2" 
     v-html="link.label" 

@@ -1,11 +1,12 @@
 <script>
+import { store } from '../store';
 
 export default {
   name: 'AppHeader',
 
   data() {
     return {
-
+      store,
     }
   },
  
@@ -36,8 +37,8 @@ export default {
           </li>
         </ul>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input v-model="this.store.serch" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button @click="$emit('serchProject')" class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </div>
