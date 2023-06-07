@@ -15,17 +15,24 @@ export default{
     AppFooter,
     AppHeader
   },
+  created(){
+    axios.get(this.store.urlApi).then(response=>{
+        this.store.projects= response.data.results.data;
+        console.log(response.data.results)
+
+      });
+  },
   methods: {
     serch(){
-      let serchUrlApi = this.urlApi;
+      let serchUrlApi = this.store.urlApi;
       if(this.store.serch){
 
-        serchUrlApi = `&name=${this.store.serch}`
+        serchUrlApi += `&title=${this.store.serch}`
       }
       console.log('serchUrlApi')
       
       axios.get(serchUrlApi).then(response=>{
-        this.store.projects= [response.data.results.data];
+        this.store.projects = response.data.results.data;
         console.log(this.store.projects)
 
       });

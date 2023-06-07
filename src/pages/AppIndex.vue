@@ -30,28 +30,14 @@ export default {
   },
 
   methods: {
-    // getProjects(urlApi) {
-    //   axios.get(urlApi).then(response => {
-    //     // console.log(response.data.results);
-    //     this.projects = response.data.results.data;
-    //     this.pagination=response.data.results;
-    //   });
-    // }
-    // ,
-    getProjects(){
-      let serchUrlApi = this.urlApi;
-      if(this.store.serch){
-
-        serchUrlApi = `&title=${this.store.serch}`
-      }
-      // console.log('serchUrlApi')
-      
-      axios.get(serchUrlApi).then(response=>{
-        this.store.projects= [response.data.results.data];
-        console.log(this.store.projects)
-
+    getProjects(urlApi) {
+      axios.get(urlApi).then(response => {
+        // console.log(response.data.results);
+        this.projects = response.data.results.data;
+        this.pagination=response.data.results;
       });
-    },
+    }
+   
     
   },
 };
@@ -65,8 +51,9 @@ export default {
     <hr>
 
     <div class="row">
-      <div v-for="project in store.projects"  class="col-4 mb-5">
+      <div v-for="project in this.store.projects"  class="col-4 mb-5">
         <ProjectCard :project="project"></ProjectCard>
+
       </div>
     </div>
   </div>
@@ -75,7 +62,7 @@ export default {
     <button v-for="link in pagination.links" class="btn m-2" 
     v-html="link.label" 
     :class="link.active?'btn-primary':'btn-outline-light'"
-    :disabled="link.url ==null ? true :  false"
+    :disabled="link.url == null ? true : false"
     @click="getProjects(link.url)">
     
     </button>
