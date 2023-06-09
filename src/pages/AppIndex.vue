@@ -16,7 +16,7 @@ export default {
 
       projects: [],
 
-      pagination:{},
+      pagination:[],
       projectsFound:false,
       search:'',
       
@@ -32,36 +32,22 @@ export default {
   },
 
   methods: {
-    // getProjects(urlApi) {
-    //   axios.get(urlApi).then(response => {
-    //     // console.log(response.data.results);
-    //     this.projects = response.data.results.data;
-    //     this.pagination=response.data.results;
-    //   });
-    // }
-    serch(urlApi){
-      urlApi = urlApi + '&title=' + this.search;
-      
-      axios.get(urlApi).then(response=>{
-        console.log(response.data)
-        // this.projects = response.data;
-        // this.projects = response.data.results;
-        // this.projectsFound = true;
 
-        
-        console.log(urlApi)
-        if(this.search!='') {
+    serch(urlApi){
+      if(this.search!='') {
+        urlApi = urlApi + '&title=' + this.search;
+          axios.get(urlApi).then(response=>{
           this.projectsFound = true;
           this.projects = response.data.results;
-          // this.pagination = response.data.results;
-          console.log(this.projects)
+        });
         }else{
-          this.projectsFound = false;
-          // this.projects = response.data.results;
+          axios.get(this.urlApi).then(response => {
+            this.projects = response.data.results.data;
+            this.pagination=response.data.results;
+            this.projectsFound = true;
+          });
         }
 
-        
-      });
     },
     
   },
@@ -71,7 +57,7 @@ export default {
 <template>
   <form class="d-flex" role="search">
           <input @change="serch(urlApi)" v-model="this.search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <a @click="serch(urlApi)" class="btn btn-outline-success">Search</a>
+          <a @click="serch(urlApi)" class="btn btn-success">Search</a>
         </form>
 
   <div class="container pt-5">
@@ -91,7 +77,7 @@ export default {
     v-html="link.label" 
     :class="link.active?'btn-primary':'btn-outline-light'"
     :disabled="link.url == null ? true : false"
-    @click="getProjects(link.url)">
+    @click="serch(link.url)">
     
     </button>
   </div>
