@@ -12,7 +12,7 @@ export default {
     return {
       store,
 
-      urlApi:'http://127.0.0.1:8000/api/projects?page=1',
+      urlApi:'http://127.0.0.1:8000/api/projects',
 
       projects: [],
 
@@ -35,7 +35,7 @@ export default {
 
     serch(urlApi){
       if(this.search!='') {
-        urlApi = urlApi + '&title=' + this.search;
+        urlApi = urlApi + '?page=1&title=' + this.search;
           axios.get(urlApi).then(response=>{
           this.projectsFound = true;
           this.projects = response.data.results;
@@ -43,7 +43,8 @@ export default {
         }else{
           axios.get(this.urlApi).then(response => {
             this.projects = response.data.results.data;
-            this.pagination=response.data.results;
+            this.pagination = response.data.results;
+
             this.projectsFound = true;
           });
         }
