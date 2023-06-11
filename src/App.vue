@@ -16,7 +16,7 @@ export default{
     AppHeader
   },
   created(){
-    this.serch(this.urlApi);
+    this.serch(store.urlApi);
   },
   methods: {
    serch(urlApi){
@@ -25,6 +25,8 @@ export default{
           axios.get(urlApi).then(response=>{
             this.store.projectsFound = true;
             this.store.projects = response.data.results;
+            this.store.pagination = 'http://127.0.0.1:8000/api/projects?page=1';
+
           });
         }else{
           axios.get(urlApi).then(response => {
@@ -35,14 +37,16 @@ export default{
         }
     },
   },
-
+  props:{
+    
+  }
 }
 </script>
 
 <template>
 
-  <AppHeader @serchProject="serch(this.urlApi)"></AppHeader>
-  <router-view @serchProject="serch(this.urlApi)"></router-view>
+  <AppHeader @serchProject="serch(store.urlApi)"></AppHeader>
+  <router-view @serchProject="serch('http://127.0.0.1:8000/api/projects?page=3')"></router-view>
   <AppFooter></AppFooter>
 
 </template>

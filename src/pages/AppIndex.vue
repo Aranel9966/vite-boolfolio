@@ -37,13 +37,24 @@ export default {
     //         this.projects = response.data.results;
     //       });
     //     }else{
-          axios.get(urlApi).then(response => {
-            this.pagination = response.data.results;
-            console.log(this.pagination)
-          });
+      if(this.store.search==''){
+
+        axios.get(urlApi).then(response => {
+          this.pagination = response.data.results;
+          this.store.pagination = 'http://127.0.0.1:8000/api/projects?page=1';
+          console.log(this.pagination)
+        });
+      }else{
+        axios.get(urlApi).then(response => {
+          this.pagination = response.data.results;
+          this.store.projects = response.data.results.data;
+          console.log(this.pagination)
+          })
         }
     // },
-  },
+    },
+  }
+
   
 };
 </script>
@@ -61,12 +72,14 @@ export default {
     </div>
   </div>
  
-  <div class=" pagination container ">
+  <div v-if="store.search==''" class=" pagination container ">
     <button v-for="link in pagination.links" class="btn m-2" 
     v-html="link.label" 
     :class="link.active?'btn-primary':'btn-outline-light'"
     :disabled="link.url == null ? true : false"
-    @click="serch(link.url)">
+    
+    @click="serch(link.url)"
+    >
     </button>
   </div>
   
