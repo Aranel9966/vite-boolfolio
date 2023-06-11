@@ -11,11 +11,8 @@ export default {
   data() {
     return {
       store,
-
       urlApi:'http://127.0.0.1:8000/api/projects',
-
       projects: [],
-
       pagination:[],
       projectsFound:false,
       search:'',
@@ -32,42 +29,33 @@ export default {
   },
 
   methods: {
-
     serch(urlApi){
-      if(this.search!='') {
-        urlApi = urlApi + '?page=1&title=' + this.search;
-          axios.get(urlApi).then(response=>{
-          this.projectsFound = true;
-          this.projects = response.data.results;
-        });
-        }else{
-          axios.get(this.urlApi).then(response => {
-            this.projects = response.data.results.data;
+    //     if(this.search!='') {
+    //       urlApi = urlApi + '?page=1&title=' + this.search;
+    //       axios.get(urlApi).then(response=>{
+    //         this.projectsFound = true;
+    //         this.projects = response.data.results;
+    //       });
+    //     }else{
+          axios.get(urlApi).then(response => {
             this.pagination = response.data.results;
-
-            this.projectsFound = true;
+            console.log(this.pagination)
           });
         }
-
-    },
-    
+    // },
   },
+  
 };
 </script>
 
 <template>
-  <form class="d-flex" role="search">
-          <input @change="serch(urlApi)" v-model="this.search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <a @click="serch(urlApi)" class="btn btn-success">Search</a>
-        </form>
-
   <div class="container pt-5">
     <h1>I Miei Progetti</h1>
 
     <hr>
 
-    <div class="row" v-if="projectsFound">
-      <div v-for="project in this.projects"  class="col-4 mb-5">
+    <div class="row" v-if="this.store.projectsFound">
+      <div v-for="project in this.store.projects"  class="col-4 mb-5">
         <ProjectCard :project="project"></ProjectCard>
       </div>
     </div>
@@ -79,11 +67,8 @@ export default {
     :class="link.active?'btn-primary':'btn-outline-light'"
     :disabled="link.url == null ? true : false"
     @click="serch(link.url)">
-    
     </button>
   </div>
-
-
   
 </template>
 

@@ -35,10 +35,10 @@ export default {
             <router-link :to="{name:'about'}" class="nav-link">Chi sono?</router-link>
           </li>
         </ul>
-        <!-- <form class="d-flex" role="search" method="get">
-          <input v-model="this.store.serch" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button id="title" @click="$emit('serchProject')" class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
+        <div class="d-flex" role="search" >
+          <input @keyup.enter="$emit('serchProject')" v-model="this.store.search" class="rounded p-1 me-2" type="search" placeholder="Search" aria-label="Search">
+          <a @click="$emit('serchProject')" class="btn btn-success" type="submit">Search</a>
+        </div>
       </div>
     </div>
   </nav>

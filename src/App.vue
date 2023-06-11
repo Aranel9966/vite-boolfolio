@@ -8,7 +8,7 @@ export default{
   data() {
     return {
       store,
-      urlApi:'http://127.0.0.1:8000/api/projects?page=1',
+      urlApi:'http://127.0.0.1:8000/api/projects',
     }
   },
   components:{
@@ -16,35 +16,33 @@ export default{
     AppHeader
   },
   created(){
-    // axios.get(this.store.urlApi).then(response=>{
-    //     this.store.projects= response.data.results.data;
-    //     // console.log(response.data.results)
-
-    //   });
-    // this.serch(this.urlApi);
-
+    this.serch(this.urlApi);
   },
   methods: {
-    // serch(urlApi){
-    //   // urlApi = this.urlApi;
-    //   urlApi = urlApi+'&title=' + this.store.serch; 
-    //   axios.get(urlApi).then(response=>{
-    //     console.log('ciao')
-    //     this.store.projects = response.data.results.data;
-    //     this.store.pagination=response.data.results;
-
-    //     console.log(this.store.projects)
-        
-    //   });
-    // },
+   serch(urlApi){
+        if(this.store.search!='') {
+          urlApi = urlApi + '?page=1&title=' + this.store.search;
+          axios.get(urlApi).then(response=>{
+            this.store.projectsFound = true;
+            this.store.projects = response.data.results;
+          });
+        }else{
+          axios.get(urlApi).then(response => {
+            this.store.projects = response.data.results.data;
+            this.store.pagination = response.data.results;
+            this.store.projectsFound = true;
+          });
+        }
+    },
   },
+
 }
 </script>
 
 <template>
 
-  <AppHeader @serchProject="serch()"></AppHeader>
-  <router-view></router-view>
+  <AppHeader @serchProject="serch(this.urlApi)"></AppHeader>
+  <router-view @serchProject="serch(this.urlApi)"></router-view>
   <AppFooter></AppFooter>
 
 </template>
