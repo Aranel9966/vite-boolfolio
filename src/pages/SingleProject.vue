@@ -58,12 +58,15 @@ export default{
             <img v-if="project.cover_image" :src="'http://127.0.0.1:8000/storage/'+ project.cover_image" alt="">
         </div>
         <div class="text">
-            <p>{{ project.description }}</p>
+            <p> <em>Descrizione:</em> {{ project.description }}</p>
             <ul>
                 <li v-for="technology in project.technologies" class="badge rounded-pill m-1" :style="{backgroundColor: technology.color}">
                 {{ technology.name }}</li>
             </ul>
+            <em>Link Github: <a :href="project.thumb">{{ project.thumb }}</a></em>
         </div>
+
+        
     </div>
     <div v-else>
         <div class="alert alert-danger m-3">
