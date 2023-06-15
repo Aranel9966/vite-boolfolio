@@ -4,6 +4,7 @@ import AppAbout from "./pages/AppAbout.vue";
 import AppTechnology from "./pages/AppTechnology.vue";
 import SingleProject from "./pages/SingleProject.vue";
 import NotFound from "./pages/NotFound.vue";
+import AppCart from "./pages/AppCart.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -36,6 +37,14 @@ const router = createRouter({
       path: "/projects/:slug",
       name: "projects.show",
       component: SingleProject,
+      meta: {
+        title: "Progetti",
+      },
+    },
+    {
+      path: "/cart/add",
+      name: "addToCart",
+      component: AppCart,
       meta: {
         title: "Progetti",
       },
