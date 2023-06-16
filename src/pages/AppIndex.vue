@@ -16,6 +16,7 @@ export default {
       pagination:[],
       projectsFound:false,
       search:'',
+      cart:[],
       
     }
   },
@@ -53,6 +54,70 @@ export default {
         }
     // },
     },
+    ///////////////////////////////////////
+    /// cart methods
+    ///////////////////////////////////
+    addToCart(project) {
+        const existingItem = this.cart.find(item => item.id === project.id);
+        // consol.log(project);
+      if (existingItem) {
+        // Se il piatto è già presente nel carrello, aumenta la quantità
+        existingItem.quantity++;
+      } else {
+        // Se il piatto non è ancora nel carrello, aggiungilo con quantità 1
+        
+        this.cart.push({
+          id: project.id,
+          name: project.title,
+          // price: dish.price,
+          quantity: 1
+        });
+        console.log(this.cart);
+      }
+    },
+    removeFromCart(item) {
+      // Rimuovi l'elemento corrispondente dal carrello
+      const index = this.cart.findIndex(cartItem => cartItem.id === item.id);
+      if (index !== -1) {
+        this.cart.splice(index, 1);
+      }
+    },
+
+    calculateTotal() {
+      // Calcola il totale del carrello
+      return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    },
+
+    placeOrder() {
+      // Qui puoi implementare la logica per inviare l'ordine al backend
+      // Utilizza una chiamata API al tuo endpoint nel backend per gestire l'ordine del carrello
+      // Creiamo un oggetto per rappresentare l'ordine
+    const order = {
+      dishes: this.cart // Array dei piatti nel carrello
+    };
+
+    // Effettuiamo una chiamata API per inviare l'ordine al backend
+    fetch('https://example.com/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(order)
+    })
+    .then(response => response.json())
+    .then(data => {
+      // L'ordine è stato salvato correttamente nel backend
+      console.log('Ordine effettuato:', data);
+
+      // Ripuliamo il carrello dopo aver effettuato l'ordine
+      this.cart = [];
+    })
+    .catch(error => {
+      console.error('Si è verificato un errore durante il salvataggio dell\'ordine:', error);
+    });
+  }
+      // console.log('Hai effettuato l\'ordine:', this.cart);
+    
   }
 
   
@@ -68,6 +133,7 @@ export default {
     <div class="row" v-if="this.store.projectsFound">
       <div v-for="project in this.store.projects"  class="col-4 mb-5">
         <ProjectCard :project="project"></ProjectCard>
+        <button @click="addToCart(project)">Aggiungi al carrello</button>
       </div>
     </div>
   </div>

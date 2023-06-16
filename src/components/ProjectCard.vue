@@ -5,6 +5,8 @@ export default {
   data() {
     return {
       baseUrl: 'http://127.0.0.1:8000/',
+      cart:[],
+      
     }
   },
 
@@ -29,6 +31,10 @@ export default {
       }
     },
   },
+
+  methods:{
+
+  }
 }
 </script>
 
@@ -52,6 +58,7 @@ export default {
         <router-link :to="{name: 'projects.show', params: {slug: project.slug}}" class="btn btn-outline-info">Leggi</router-link>
 
       </div>
+      <!-- <button @click="addToCart(project)">Aggiungi al carrello</button> -->
 
     </div>
 
